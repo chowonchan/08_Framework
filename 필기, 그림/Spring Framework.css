@@ -1,0 +1,75 @@
+[Framwork란? ]    /*    https://spring.io/    */ 참고
+- 개발시 필요한 기본구조와 뼈대를 제공하는 틀
+- 코드의 재사용성을 증가 시키기 위해 일련의 클래스 묶음이나 뼈대, 틀을 라이브러리 형태로 제공함
+
+[Spring Framwork란? ]
+
+-동적인 웹 사이트를 개발하기 위한 여러 가지 서비스를 제공함
+-전자정부 표준 프레임워크(Spring MVC Project 기반 프레임워크)의 기반 기술로서 사용
+
+- [API(Application Programming Interface)]
+  서로 다른 소프트웨어 구성 요소 간의 상호 작용을 정의하는 규약
+  API를 통해 서로 다른 프로그램들이 데이터를 주고받거나 기능을 호출하여 통신할 수 있음
+
+
+[Spring Framwork의 주요 특징 ]
+
+- { IOC (Inversion of Control)제어 반전} 
+  객체의 생성부터 모든 생명주기의 관리까지 프레임워크가 주도함.
+  클래스 간의 결합도를 낮추고 유지보수성을 향상시킬 수 있음
+
+- { DI (Dependency Injection) 의존성 주입}
+  개발자가 직접 객체를 생성하지 않고
+  Spring Container가 만들어둔 객체를 필요한 위치에서 주입함.
+
+- { POJO (Plain Old Java Object)}  J2EE, EJB
+  일반적인 자바 객체(POJO)를 사용할 수 있도록 지원함.
+
+- { AOP (Aspect Oriented Programming)관점 지향 프로그래밍}
+  로깅, 보안, 트랜잭션 관리 등 공통적인 관심사를 분리하여 코드 중복을 줄이고 유지보수성을 향
+  상 시키는 기능을 지원함.
+
+- {Spring MVC} 
+  MVC(Model, View, Controller) 디자인 패턴을 적용할 수 있는 어노테이션을 지원하고,
+  IOC / DI를 이용해 의존 관계를 관리하여 개발자가 아닌 서버가 객체들을
+  관리하는 웹 애플리케이션을 구축 할 수 있음.
+
+- {PSA (Portable ServiceAbstraction)}
+  스프링은 다른 여러 모듈을 사용함에 있어 별도의 추상화 레이어를 제공하여 특정 기술에 종속되
+  지 않으면서 다양한 기술 스택을 쉽게 사용할 수 있음
+
+  
+  [Spring Boot]    /*    https://spring.io/    */ 참고
+  
+  {장점}
+  - 다양한 Starter POM 파일을 제공해서 Maven, Gradle 등의 빌드 도구 구성, 라이브러리 관리를 간소화
+  
+  - Spring Starter를 이용해서 프로젝트를 생성 및 초기 설정을 간소화
+
+
+
+ [ 설정 ]
+  
+  General show heap 체크
+          > workspace > refresh using 체크
+
+  devstyle > user the startup 해제
+
+  xml > download 체크
+
+  formatter > java > formatter > edit > indentation -tap :2
+                                      >상단 제목 -tap2 추가
+
+  [프로젝트 생성]
+
+  New → Spring Boot → Spring Starter Project
+  
+  [group][artifact]
+  edu.kh.demo
+
+
+  Spring
+  Spring boot devtools
+  lombok
+  thymeleaf
+  Spring configuration Processer 검색 체크
