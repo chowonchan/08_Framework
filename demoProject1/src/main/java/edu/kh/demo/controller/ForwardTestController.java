@@ -35,6 +35,7 @@ public class ForwardTestController {
 	 *   1) 클래스 위에 작성하는 경우
 	 *   		- 공통 주소를 해당 클래스에 매핑
 	 *   		ex) /todo/select, /todo/insert, /todo/update...
+	 *   
 	 *   		 -> @RequestMapping("todo") // /todo로 시작하는 요청
 	 *   
 	 *   
@@ -66,7 +67,7 @@ public class ForwardTestController {
 	 * 매핑 주소 제일 앞에 "/" 를 적지 않는다!! 
 	 */
 	
-	@RequestMapping("forward")
+	@RequestMapping("forward") // /forward 요청 매핑 (GET/POST 가리지 않음)
 	public String forwardTest() {
 		
 		System.out.println("/forward 매핑 됬는지 확인");

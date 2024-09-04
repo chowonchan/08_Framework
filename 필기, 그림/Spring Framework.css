@@ -47,6 +47,31 @@
   - Spring Starter를 이용해서 프로젝트를 생성 및 초기 설정을 간소화
 
 
+  Annotation : @ 주석 (컴파일러가 인식하는 주석, 역할 지정)
+
+
+
+  [Thymeleaf]   /*   https://www.thymeleaf.org/   */
+
+
+  1. 템플릿 엔진
+    템플릿 양식과 특정 데이터 모델에 따른 입력 자료를 합성하여 결과 문서(응답 화면)를 출력하는 것
+    → 만들어둔 화면(html)에 데이터를 추가하여 하나의 html로 만들어서 응답
+    (JSP도 템플릿 엔진)
+
+  2. Thymeleaf (타임리프)
+    웹 및 독립 실행형 환경 모두를 위한 최신 서버 측 Java 템플릿 엔진
+    HTML 파일에서 th(Thymeleaf) 속성을 이용해 컨트롤러로 부터 전달 받은데이터를 이용해 동적 페이지를 만들 수 있음.
+    Spring Boot에서는 JSP가 아닌 Thymeleaf 사용을 권장하고 있음
+
+
+  4. Thymeleaf 문법(표현식)
+
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    th속성을 사용하기 위해 선언된 네임스페이스
+    순수 HTML로만 이루어진 페이지의 경우, 선언하지 않아도 무관
+
+
 
  [ 설정 ]
   
