@@ -300,14 +300,14 @@
   
   -{th:classappend 속성}
 
-  - 클래스 속성 값을 추가하는 tyhmeleaf 속성
+    - 클래스 속성 값을 추가하는 tyhmeleaf 속성
 
-  - th:classappend 작성 시 모두 소문자!!
+    - th:classappend 작성 시 모두 소문자!!
 
-  <!-- class="a b"로 추가됨 -->
-  <h4 class="a" th:classappend="b"></h4>
+    <!-- class="a b"로 추가됨 -->
+    <h4 class="a" th:classappend="b"></h4>
 
-  <h4 th:classappend="${num} > 90000 ? green : red">결과</h4>
+    <h4 th:classappend="${num} > 90000 ? green : red">결과</h4>
 
 
   - {안전 탐색 연산자 ( ${객체.필드} )}

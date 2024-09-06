@@ -10,3 +10,39 @@
   미리 만들어 놓고 꺼내 쓰는 것,
   빠르고, 간단하고 믿을 수 있는 HikariCP는 
   "오버헤드 제로(처리 시간을 극단적으로 줄이는 것을 목표)"
+
+  [Datasourse]
+  - DB와 연결을 해주는 역할
+
+  { SqlSession } : DB연결 + SQL파일 위치 등록 
+                  + 마이바티스 설정 적용 + 클래스별칭
+
+
+  { @Controller }
+  -프리젠테이션 레이어, 웹 애플리케이션에서 View에서 전달된 웹 요청과 응답을 처리하는 클래스
+                  
+
+-------------------------------------------------------
+ {DB 연결 순서}
+
+  1) config.properties 내용을 읽어와
+    HikariConfig Bean 생성/등록
+
+  2)  HikariConfig Bean
+    DataSoruce Bean(Java DBCP사용을 위한 인터페이스 ) Bean 등록
+
+  3) DataSource Bean을 이용해서
+    (DataSourceTransactionManager Bean 등록)
+    DBCP을 이용해서 SQL 수행시 트랜잭션 처리를 관리
+
+  4) DataSoruce + mapper파일 + mybatis-congfig.xml 파일을 이용해
+    SqlSession Bean 등록 
+    (DB연결 + SQL파일 위치 등록 
+      + 마이바티스 설정 적용 + 클래스 별칭 등록)
+
+  5) SqlSessionFactory 이용해
+    SqlSessionTemplate Bean 등록
+    (DB연결 + 마이바티스 기능 사용 
+    + Spring 제공 트랜잭션 관련 어노테이션 사용가능)
+
+-------------------------------------------------------
