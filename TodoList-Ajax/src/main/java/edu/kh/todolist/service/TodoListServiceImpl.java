@@ -41,28 +41,24 @@ public class TodoListServiceImpl implements TodoListService{
 	
 	@Override
 	public int todoAdd(Todo todo) {
-		
 		return mapper.todoAdd(todo);
 	}
 	
 	
 	@Override
 	public Todo todoDetail(int todoNo) {
-		
 		return mapper.todoDetail(todoNo);
 	}
 	
 	
 	@Override
 	public int todoComplete(int todoNo) {
-		
 		return mapper.todoComplete(todoNo);
 	}
 	
 	
 	@Override
 	public int todoUpdate(Todo todo) {
-		
 		return mapper.todoUpdate(todo);
 	}
 	
@@ -71,5 +67,9 @@ public class TodoListServiceImpl implements TodoListService{
 		return mapper.todoDelete(todoNo);
 	}
 	
+	@Override
+	public String searchTitle(int todoNo) {
+		return mapper.searchTitle(todoNo);
+	}
 	
 }
