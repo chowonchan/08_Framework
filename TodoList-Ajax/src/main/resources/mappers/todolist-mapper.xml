@@ -83,6 +83,12 @@
 		WHERE TODO_NO = #{todoNo}
 	</select>
 	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM TB_TODO
+	
+	</select>
+
 	
 
 </mapper>

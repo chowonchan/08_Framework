@@ -9,7 +9,7 @@ import edu.kh.todolist.dto.Todo;
 @Mapper // 상속 받은 클래스 생성 후 Bean 등록
 public interface TodoListMapper {
 
-	/** 할 일 목록 조회
+	/** 할 일 목록 조회 & (비동기 요청 처리)
 	 * @return todoList
 	 */
 	List<Todo> selectTodoList();
@@ -54,7 +54,12 @@ public interface TodoListMapper {
 	 * @return
 	 */
 	String searchTitle(int todoNo);
-	
+
+	/** 전체 할 일 개수 조회
+	 * @return
+	 */
+	int getTotalCount();
+
 	
 
 }
