@@ -4,8 +4,8 @@
 
 [Spring Framwork란? ]
 
--동적인 웹 사이트를 개발하기 위한 여러 가지 서비스를 제공함
--전자정부 표준 프레임워크(Spring MVC Project 기반 프레임워크)의 기반 기술로서 사용
+- 동적인 웹 사이트를 개발하기 위한 여러 가지 서비스를 제공함
+- 전자정부 표준 프레임워크(Spring MVC Project 기반 프레임워크)의 기반 기술로서 사용
 
 - [API(Application Programming Interface)]
   서로 다른 소프트웨어 구성 요소 간의 상호 작용을 정의하는 규약
@@ -42,7 +42,8 @@
   [Spring Boot]    /*    https://spring.io/    */ 참고
   
   {장점}
-  - 다양한 Starter POM 파일을 제공해서 Maven, Gradle 등의 빌드 도구 구성, 라이브러리 관리를 간소화
+  - 다양한 Starter POM 파일을 제공해서 Maven, Gradle 등의 빌드 도구 구성, 
+      라이브러리 관리를 간소화
   
   - Spring Starter를 이용해서 프로젝트를 생성 및 초기 설정을 간소화
 
@@ -61,7 +62,8 @@
 
   2. Thymeleaf (타임리프)
     웹 및 독립 실행형 환경 모두를 위한 최신 서버 측 Java 템플릿 엔진
-    HTML 파일에서 th(Thymeleaf) 속성을 이용해 컨트롤러로 부터 전달 받은데이터를 이용해 동적 페이지를 만들 수 있음.
+    HTML 파일에서 th(Thymeleaf) 속성을 이용해 컨트롤러로 부터 
+    전달 받은데이터를 이용해 동적 페이지를 만들 수 있음.
     Spring Boot에서는 JSP가 아닌 Thymeleaf 사용을 권장하고 있음
 
 

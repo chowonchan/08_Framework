@@ -1,0 +1,28 @@
+[Framwork란? ]
+- 개발시 필요한 기본구조와 뼈대를 제공하는 틀
+- 코드의 재사용성을 증가 시키기 위해 일련의 클래스 묶음이나 뼈대, 틀을 라이브러리 형태로 제공함
+
+[Spring Framwork란? ]
+
+- 동적인 웹 사이트를 개발하기 위한 여러 가지 서비스를 제공함
+
+
+Thymeleaf (타임리프)
+ th(Thymeleaf) 속성을 이용해 컨트롤러로 부터 전달 받은데이터를 이용해 동적 페이지를 만들 수 있음.
+    Spring Boot에서는 JSP가 아닌 Thymeleaf 사용을 권장하고 있음
+
+- ${key} : request scope에 세팅된 값 얻어와 출력
+
+
+{ @Controller }
+ - 요청 / 응답 제어 하는 역할 명시 + Bean 등록
+
+{ @Service }
+ -  비지니스 로직을 처리하는 역할 명시 + Bean 등록(IOC)
+
+{ @Autowired } 
+ - 등록된 Bean 중에서 같은 타입의 Bean을 대입(의존성 주입 DI)
+
+ { @Mapper }
+ - Mybatis 제공 어노테이션
+ - 해당 인터페이스를 상속 받은 클래스 자동 구현 + Bean 등록
