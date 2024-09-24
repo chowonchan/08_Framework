@@ -17,5 +17,23 @@ public interface MemberMapper {
 	 */
 	Member login(String memberEmail);
 
+	/** 회원 가입
+	 * @param inputMember
+	 * @return
+	 */
+	int signUp(Member inputMember);
+
+	/** 이메일 중복 검사
+	 * @param email
+	 * @return count
+	 */
+	int emailCheck(String email);
+
+	/** 닉네임 중복 검사
+	 * @param nickname
+	 * @return count
+	 */
+	int nicknameCheck(String nickname);
+
 
 }
