@@ -75,4 +75,5 @@ public class MyPageServiceImpl implements MyPageService{
 		// 2) 회원 탈퇴 Mapper 호출(update)
 		return mapper.secession(loginMember.getMemberNo());
 	}
+
 }

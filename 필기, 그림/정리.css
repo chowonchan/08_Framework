@@ -48,6 +48,14 @@ Thymeleaf (타임리프)
 	  매개변수에 저장하는 어노테이션
 
 
+ [ @RequiredArgsConstructor ] @Autowired 를 여러개 쓰는 대신
+   - 필드 중 final 키워드가 작성된 필드 값을 초기화 하기 위한
+      생성자를 자동 완성하는 Lombok 제공 어노테이션
+
+    + final 필드 초기화를 위한 생성자 매개 변수에
+      자동으로 같은 자료형의 Bean을 의존성 주입
+
+
 
 
  [ @SessionAttributes ]
