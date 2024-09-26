@@ -136,3 +136,14 @@ Thymeleaf (타임리프)
     const letterCheck = /[a-zA-Z]/.test(newPw); // 영어 알파벳 포함
     const numberCheck = /\d/.test(newPw); // 숫자 포함
     const specialCharCheck = /[!@#_-]/.test(newPw); // 특수문자 포함
+
+
+
+ [ MultipartFile이 제공하는 메서드 ]
+		
+     - getSize() : 파일 크기
+     - isEmpty() : 업로드한 파일이 없을 경우 true
+     - getOriginalFileName() : 원본 파일 명
+     - transferTo(경로) : 
+        메모리 또는 임시 저장 경로에 업로드된 파일을
+        원하는 경로에 전송(서버 어떤 폴더에 저장할지 지정)
