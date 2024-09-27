@@ -1,5 +1,7 @@
 package edu.kh.project.myPage.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.project.member.dto.Member;
 
 public interface MyPageService {
@@ -15,5 +17,7 @@ public interface MyPageService {
 	int changePw(String currentPw, String newPw, Member loginMember);
 
 	int secession(String memberPw, Member loginMember);
+
+	String profile(MultipartFile profileImg, int memberNo);
 
 }
