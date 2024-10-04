@@ -29,7 +29,7 @@ public class Board {
 	private String boardUpdateDate;
 	private int		 readCount;
 	private String boardDelFl;
-	private int 	 mamberNo;
+	private int 	 memberNo;
 	private int 	 boardCode;	
 	
 	// MEMBER 테이블 JOIN
