@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.project.board.dto.Board;
@@ -29,6 +30,45 @@ public interface BoardMapper {
 	 * @return
 	 */
 	Board selectDetail(Map<String, Integer> map);
+
+	/** 조회수 1증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+
+	/** 게시글 좋아요
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int checkBoardLike(@Param("boardNo") int boardNo,
+										 @Param("memberNo") int memberNo);
+
+	/** result2 가 0 일때 INSERT
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int insertBoardLike(@Param("boardNo") int boardNo,
+			 								@Param("memberNo") int memberNo);
+
+	/** result2 가 1 일때 DELETE
+	 * @param boardNo
+	 * @param memberNo
+	 * @return
+	 */
+	int deleteBoardLike(@Param("boardNo") int boardNo,
+			 								@Param("memberNo") int memberNo);
+
+	/** 게시글 개수 조회
+	 * @param boardNo
+	 * @return
+	 */
+	int getLikeCount(int boardNo);
+
+
+	List<Map<String, String>> selectBoardTypeList();
 
 
 }

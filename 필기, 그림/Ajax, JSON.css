@@ -84,15 +84,20 @@
  HTML 로딩(랜더링)이 끝난 후 수행
  
 
- 
+
+[Session]
+- 데이터를 서버에서 관리
+- 클라이언트가 서버에 최초 연결 시 생성
+
 [Cookie란?]
- * - 클라이언트 측(브라우저)에서 관리하는 데이터(파일 형식)
+-> 서버에서 읽은 게시글 번호ㅡㄹ 쿠키에 기록하여 클라이언트에게 전달
+ *** - 클라이언트 측(브라우저)에서 관리하는 데이터(파일 형식)
  * 
  * - Cookie에는 만료기간, 데이터(key=value), 사용하는 사이트(주소)
  *  가 기록되어 있음
  *  
- * - 클라이언트가 쿠키에 기록된 사이트로 요청으로 보낼 때
- *   요청에 쿠키가 담겨져서 서버로 넘어감
+ *** - 클라이언트가 쿠키에 기록된 사이트로 요청으로 보낼 때
+ *    요청에 쿠키가 담겨져서 서버로 넘어감
  *   
  * - Cookie의 생성, 수정, 삭제는 Server가 관리
  *   저장은 Client가 함
@@ -120,3 +125,30 @@
   4. resp 객체에 추가해서 클라이언트에게 전달
   resp.addCookie(cookie);
  
+  [ Calendar ]
+   Calendar 객체 : 시간을 저장하는 객체
+   Calendar.getInstance() : 현재 시간이 저장된 객체가 반환됨
+  Calendar cal = Calendar.getInstance();
+
+
+  [ Interceptor ]
+  * - 요청/응답을 가로채는 객체 (Spring 지원)
+  * Client <-> Filter <-> Dispatcher Servlet <-> Interceptor <-> Controller ....
+  * - HandlerInterceptor 인터페이스 상속 필요
+  * - 제공 메서드 중 필요한 메서드 오버라이딩
+  * 
+  * 1) proHandle() - 전처리
+  * Dispathcher Servlet -> Controller
+  * 사이에 요청/응답을 가로채서 수행
+  * 
+  * 2) postHandle() - 후처리
+  *  Controller -> Dispathcher Servlet 
+  *  사이에 요청/응답을 가로채서 수행
+  * 
+  * 3) afterCompletion() - forward된 뷰 완성 후
+  *   View Resolver -> Dispatcher Servlet 사이 수행
+
+  [ URI ]
+  [Uniform Resource Identifier] : 통합 자원 식별자
+   - 자원 이름(주소)만 봐도 무엇인지 구별할 수 있는 문자열
+   ex)  /editBoard/1/insert
