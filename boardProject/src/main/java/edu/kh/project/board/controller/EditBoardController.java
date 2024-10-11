@@ -1,12 +1,17 @@
 package edu.kh.project.board.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -14,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.board.dto.Board;
+import edu.kh.project.board.service.BoardService;
 import edu.kh.project.board.service.EditBoardService;
 import edu.kh.project.member.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 public class EditBoardController {
 	
 	private final EditBoardService service;
+	
+	// 수정 시 상세 조회 서비스 호출을 위한 객체 의존성 주입
+	private final BoardService boardService;
 
 	
 	/* @PathVariable 사용 시 정규 표현식 적용 가능!!
@@ -100,7 +109,160 @@ public class EditBoardController {
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:" + path;
+	}
+	
+	/** 게시글 삭제
+	 * - DB에서 boardNo, memberNo 가 일치하는
+	 * 	 BOARD_TABLE의 행의 BOARD_DEL_FL 컬럼 값을 'Y'로 변경 
+	 * @param boardNo
+	 * @param loginMember
+	 * @param ra
+	 * @param referer : 현재 컨트롤러 메서드를 요청한 페이지 주소
+	 *                  (이전 페이지 주소 == 상세 조회 페이지)
+	 * @return 
+	 * - 삭제 성공시 : "삭제 되었습니다" 메세지 전달
+	 * 								+ 해당 게시판 목록으로 redirect
+	 * - 삭제 실패시 : "삭제 실패" 메시지 전달
+	 * 								+ 삭제 하려던 게시글 상세조회 페이지 redirect
+	 */
+	@PostMapping("delete")
+	public String boardDelete(
+			@RequestParam("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra,
+			@RequestHeader("referer") String referer) {
 		
+		
+		// http://localhost/board/1/2027
+		log.debug("referer : {}", referer);
+		
+		int result = service.boardDelete(boardNo, loginMember.getMemberNo());
+		
+// 1) referer 주소에서 마지막 주소 삭제하는 법
+//		String[] aaa = referer.split("/");
+//		String tt = "/" + aaa[3] + "/" + aaa[4];
+		
+// 2)
+		int aaa = referer.lastIndexOf("/");
+		String tt = referer.substring(0, aaa);
+		
+// 3)
+//    http://localhost/board/2/2018 
+//		int start = input.indexOf("/board");
+//		int end   = input.lastIndexOf("/");
+		
+		
+		
+		String message = null;
+		String path    = null;
+		
+		if(result > 0) {
+			message = "삭제 되었습니다";
+			path		= tt;
+			
+//   4) 정규표현식
+//			String regExp = "/board/[0-9]+";
+//			
+//			// 정규식이 적용된 자바 객체
+//			Pattern pattern = Pattern.compile(regExp);
+//			
+//			// input에서 정규식과 일치하는 부분을 찾아 저장하는 객체
+//			Matcher matcher = pattern.matcher(referer);
+//			
+//			if(matcher.find()) { // 일치하는 부분을 찾은 경우
+//				path = matcher.group(); // /board/1
+//			}
+			
+		} else {
+			message = "삭제 실패";
+			path		= referer;
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	/** 게시글 수정 화면 전환
+	 * @param boardCode : 게시판 종류
+	 * @param boardNo : 수정할 게시글 번호
+	 * @param loginMember : 로그인한 회원 정보(session)
+	 * @param ra 	 : redirect 시 request scope로 데이터 전달
+	 * @param model : forward 시 request scope로 데이터 전달
+	 */
+	@PostMapping("{boardCode}/{boardNo}/updateView")
+	public String updateView(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra,
+			Model model) {
+		
+		// boardCode, boardNo가 일치하는 글 조회
+		Map<String, Integer> map = 
+				Map.of("boardCode", boardCode, "boardNo", boardNo);
+		
+		Board board = boardService.selectDetail(map);
+		
+		// 게시글이 존재하지 않는 경우
+		if(board == null) {
+			ra.addFlashAttribute("message", 
+													"해당 게시글이 존재하지 않습니다");
+			return "redirect:/board/" + boardCode;
+		}
+		
+		// 게시글 작성자가 로그인한 회원이 아닌 경우
+		if(board.getMemberNo() != loginMember.getMemberNo()) {
+			ra.addFlashAttribute("message",
+													"글 작성자만 수정 가능 합니다");
+			
+			return String.format("redirect:/board/%d/%d", 
+													boardCode, boardNo); // 상세 조회
+		}
+		
+		// 게시글이 존재하고 로그인한 회원이 맞을 경우
+		// 수정 화면으로 forward 
+		model.addAttribute("board", board);
+		
+		return "board/boardUpdate";
+	}
+	
+	/** 게시글 수정
+	 * @return
+	 */
+	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
+	public String boardUpdate(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+			@ModelAttribute Board inputBoard,
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam("images") List<MultipartFile> images,
+			@RequestParam(value="deleteOrderList", required = false)
+					String deleteOrderList,
+			RedirectAttributes ra
+			) {
+		
+		
+		// 1. 커맨드 객체 inputBoard에 로그인한 회원 번호 추가
+		inputBoard.setMemberNo(loginMember.getMemberNo());
+		
+		// inputBoard에 세팅된 값
+		// : boardCode, boardNo, boardTitle, boardContent, memberNo
+		
+		// 2. 게시글 수정 서비스 호출 후 결과 반환
+		int result = service.boardUpdate(inputBoard, images, deleteOrderList);
+		
+		
+		String message = null;
+		if(result > 0) {
+			message = "게시글이 수정 되었습니다";
+		} else {
+			message = "수정 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+			
+		return String.format("redirect:/board/%d/%d", boardCode, boardNo); // 상세 조회
 	}
 	
 	

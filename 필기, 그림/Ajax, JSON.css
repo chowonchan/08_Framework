@@ -152,3 +152,119 @@
   [Uniform Resource Identifier] : 통합 자원 식별자
    - 자원 이름(주소)만 봐도 무엇인지 구별할 수 있는 문자열
    ex)  /editBoard/1/insert
+
+
+  [ referer ] - 검사(F12) / 네트워크 / 헤더 에 있음
+  해당 페이지를 방문시 남는 흔적 
+
+   1) referer 주소에서 마지막 주소 삭제하는 법
+  		String[] aaa = referer.split("/");
+  		String tt = "/" + aaa[3] + "/" + aaa[4];
+      
+   2)
+      int aaa = referer.lastIndexOf("/");
+      String tt = referer.substring(0, aaa);
+      
+   3)
+      http://localhost/board/2/2018 
+  		int start = input.indexOf("/board");
+  		int end   = input.lastIndexOf("/");
+      
+
+  if (태그 안에)
+
+	 4) [ 정규표현식 ] 
+			String regExp = "/board/[0-9]+";
+			
+			// 정규식이 적용된 자바 객체
+			Pattern pattern = Pattern.compile(regExp);
+			
+			// input에서 정규식과 일치하는 부분을 찾아 저장하는 객체
+			Matcher matcher = pattern.matcher(referer);
+			
+			if(matcher.find()) { // 일치하는 부분을 찾은 경우
+				path = matcher.group(); // /board/1
+			}
+
+
+      <!-- <resultMap> 태그 
+      1) 조회된 컬럼명과 DTO 필드명이 
+         일치하지 않을 때 매핑 시키는 역할
+    
+           ** 이거 사용! **
+      2) <collection> 태그를 추가 작성하여
+         여러 행 조회 결과를 가지는 
+         다른 <select> 수행 후
+         그 결과를 지정된 DTO 필드에 대입(매핑)
+    -->
+   
+    
+
+/* 수정 시 이미지를 조회해서 수정 페이지에 입력 시키는 xml
+resultMap을 이용 */
+    <!-- 
+      type : 매핑할 DTO의 경로 또는 별칭 
+      id   : resultMap 태그를 식별할 이름  
+    -->
+    
+    <resultMap type="Board" id="board_rm">
+    
+      <!-- id 태그 : PK 역할 필드, 컬럼 작성 태그(필수 작성) -->
+      <id property="boardNo" column="BOARD_NO"/>
+      
+    <!-- collection 태그
+      select로 조회된 결과를 컬렉션(List)에 담아
+      지정된 필드에 세팅
+      
+      property : List를 담을 DTO의 필드명
+      select : 실행할 select의 id
+      column : 조회 결과 중 지정된 컬럼의 값을 파라미터로 전달
+      javaType : List(컬렉션)의 타입을 지정
+      ofType : List(컬렉션)의 제네릭(타입 제한) 지정
+    -->
+      <collection property="imageList"
+            select="selectImageList"
+            column="BOARD_NO"
+            javaType="java.util.ArrayList"
+            ofType="BoardImg"
+      />
+      
+      <collection property="commentList"
+            select="selectCommentList"
+            column="BOARD_NO"
+            javaType="java.util.ArrayList"
+            ofType="Comment"
+      />
+            
+    
+    </resultMap>
+  
+
+[Set] : 중복된 값을 저장 못하게하는 객체(Java Set 똑같음)
+// * Set을 사용하는 이유 : 
+// X 버튼이 눌러질 때 마다 order가 저장될 예정인데
+// 중복되는 값을 저장 못하게 하기 위해서
+
+
+[ REST (REpresentational State Transfer)  API ]
+
+- 자원(데이터,파일)을 이름(주소)으로 
+  구분(representational) 하여
+  자원의 상태(State)를 주고 받는 것(Transfer)
+
+ -> 자원의 이름(주소)를 명시하고
+   HTTP Method(GET,POST,PUT,DELETE) 를 이용해
+   지정된 자원에 대한 CRUD 진행
+
+  자원의 이름(주소)는 하나만 지정 (ex. /comment)
+   
+  삽입 == POST    (Create)
+  조회 == GET     (Read)
+  수정 == PUT     (Update)
+  삭제 == DELETE  (Delete)
+
+  
+  [ useGeneratedKeys ]
+  useGeneratedKeys="true"
+		: DB에서 생성된 key(시퀀스) 값을
+		  자바에서도 사용할 수 있게 하는 속성

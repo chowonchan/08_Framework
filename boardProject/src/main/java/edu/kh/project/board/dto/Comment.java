@@ -9,23 +9,27 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 public class Comment {
-	
+
 	/* COMMENT 테이블 컬럼 매핑 필드 */
-	private int		 commentNo;
+	private int    commentNo;
 	private String commentContent;
 	private String commentWriteDate;
+	private String commentDelFl;
 	private int    memberNo;
-	private int    boardNo;
-	private int 	 parentCommentNo;
+	private int 	 boardNo;
+	private int    parentCommentNo;
 	
 	/* 댓글에 포함될 작성자명, 작성자 프로필 */
 	private String memberNickname;
 	private String profileImg;
+	
+	
+	
 	
 	
 }

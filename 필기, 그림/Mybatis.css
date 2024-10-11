@@ -49,3 +49,19 @@
     + Spring 제공 트랜잭션 관련 어노테이션 사용가능)
 
 -------------------------------------------------------
+
+
+[마이바티스 #, $의 의미]
+  		
+  # (PreparedStatement)
+  - {} 내 값을 SQL에 맞는 리터럴 표기법으로 변경해서 대입
+  ex) (int) 10 		 -> 10 (NUMBER)
+    (String) "apple" -> 'apple' (CHAR)
+    
+  $ (Statement)
+  - {} 내 값을 있는 그대로 SQL에 대입 (SQL 코드로 인식)
+  ex) (int) 10  		   ->  10  
+    (String) "apple"   ->  apple
+
+  ※ SQL Injection이 발생 할 수 있기 때문에 권장하지 않음
+      -> 해당 SQL은 <forEach> 태그로 변경하면 좋음
