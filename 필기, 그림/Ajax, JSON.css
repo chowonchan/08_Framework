@@ -131,13 +131,14 @@
   Calendar cal = Calendar.getInstance();
 
 
+
   [ Interceptor ]
   * - 요청/응답을 가로채는 객체 (Spring 지원)
   * Client <-> Filter <-> Dispatcher Servlet <-> Interceptor <-> Controller ....
   * - HandlerInterceptor 인터페이스 상속 필요
   * - 제공 메서드 중 필요한 메서드 오버라이딩
   * 
-  * 1) proHandle() - 전처리
+  * 1) preHandle() - 전처리
   * Dispathcher Servlet -> Controller
   * 사이에 요청/응답을 가로채서 수행
   * 
@@ -147,6 +148,8 @@
   * 
   * 3) afterCompletion() - forward된 뷰 완성 후
   *   View Resolver -> Dispatcher Servlet 사이 수행
+
+
 
   [ URI ]
   [Uniform Resource Identifier] : 통합 자원 식별자
@@ -268,3 +271,15 @@ resultMap을 이용 */
   useGeneratedKeys="true"
 		: DB에서 생성된 key(시퀀스) 값을
 		  자바에서도 사용할 수 있게 하는 속성
+
+
+  
+  [ 동적 SQL ] 
+      : <choose> <when> <otherwise>
+      - if ~ else if ~ else 와 같은 기능을 수행하는 태그
+      
+      - <choose> : <when> <otherwise>를 감싸는 태그
+      
+      - <when> : if, else if를 나태내는 태그
+      
+      - <otherwise> : else를 나타내는 태그	

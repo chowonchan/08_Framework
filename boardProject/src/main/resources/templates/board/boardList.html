@@ -61,8 +61,7 @@
 
                   <!-- 상세조회 요청 주소 /board/{boardCode}/{boardNo} -->
                   <a th:href="@{/board/{boardCode}/{boardNo} 
-                              (boardCode=${boardCode}, boardNo=*{boardNo})}"
-                     th:text="*{boardTitle}">게시글 제목</a>
+                              (boardCode=${boardCode}, boardNo=*{boardNo})}" th:text="*{boardTitle}">게시글 제목</a>
                   <th:block th:text="|[*{commentCount}]|"></th:block> <!-- 댓글 수 -->
                 </td>
 
@@ -139,7 +138,7 @@
 
 
       <!-- 검색창 -->
-      <form action="#" method="get" id="boardSearch">
+      <form th:action="@{{code}(code=${boardCode})}" method="get" id="boardSearch">
 
         <select name="key" id="searchKey">
           <option value="t">제목</option>
