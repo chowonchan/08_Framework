@@ -59,6 +59,10 @@ Thymeleaf (타임리프)
     + final 필드 초기화를 위한 생성자 매개 변수에
       자동으로 같은 자료형의 Bean을 의존성 주입
 
+  [ @Configuration ] 
+    - 서버 실행 시 내부 메서드 모두 수행 -> 설정 적용
+
+
 
 
 
@@ -163,7 +167,7 @@ Thymeleaf (타임리프)
    //  서버 컴퓨터에 C:/uploadFiles/test/ 폴더로 연결
           
    } 
-   ]
+ ]
 
 
 

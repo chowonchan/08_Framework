@@ -345,8 +345,8 @@ public class BoardController {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-//	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/goToList")
-	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/goToList")
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/goToList")
+//	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/goToList")
 	public String goToList(
 		@PathVariable("boardCode") int boardCode,
 		@PathVariable("boardNo") int boardNo,
@@ -395,7 +395,7 @@ public class BoardController {
 	 * 한 번에 잡아서 처리하는 메서드(클래스 레벨)
 	 * @return
 	 */
-	//@ExceptionHandler(Exception.class)
+//	@ExceptionHandler(Exception.class)
 	public String boardExceptionHandler(Exception e, Model model) {
 		
 		model.addAttribute("e", e);
