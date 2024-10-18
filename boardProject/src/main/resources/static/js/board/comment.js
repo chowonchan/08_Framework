@@ -80,7 +80,41 @@ const insertComment = (parentCommentNo) => {
 
       alert("댓글이 등록 되었습니다");
       commentContent.value = ""; // textarea에 작성한 댓글 내용 삭제
-      selectCommentList();
+      selectCommentList(); // 댓글 목록 비동기 조회 후 출력
+
+      // 알림 클릭 시 이동하는 url에 ?cn=댓글번호 추가
+      // -> 알림 클릭 시 작성된 댓글 또는 답글 위치로 바로 이동
+
+      // 댓글 작성한 경우
+      // -> {닉네임}님이 {게시글 제목} 게시글에 댓글을 작성했습니다
+      if(parentCommentNo === undefined){
+        const content
+          = `<string>${memberNickname}</string>님이
+              <strong>${boardDetail.boardTitle}</strong> 
+              게시글에 댓글을 작성했습니다`;
+
+        sendNotification(
+          "insertComment",
+          `${location.pathname}?cn=${commentNo}`,
+          boardDetail.boardNo,
+          content
+        );
+
+      }
+
+      // 답글(대댓글) 을 작성한 경우
+      // -> {닉네임}님이 답글을 작성했습니다
+      else{
+        const content
+          = `<string>${memberNickname}</string>님이 답글을 작성했습니다`;
+
+        sendNotification(
+          "insertChildComment",
+          `${location.pathname}?cn=${commentNo}`,
+          parentCommentNo,
+          content
+        );
+      }
     })
     .catch(err => console.error(err));
 
@@ -270,28 +304,28 @@ const showUpdateComment = (btn) => {
   updateBtn.addEventListener("click", () => {
     const data = {
       "commentNo": commentNo,
-      "commentContent" : textarea.value
+      "commentContent": textarea.value
     }
 
     fetch("/comment", {
-      method  : "PUT",
-      headers : {"content-Type" : "application/json"},
-      body    : JSON.stringify(data)
+      method: "PUT",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(data)
     })
-    .then(response => {
-      if(response.ok) return response.text();
-      throw new Error("댓글 수정 실패");
-    })
-    .then(result => {
-      if(result > 0){
-        alert("댓글이 수정 되었습니다");
-        selectCommentList(); // 댓글 목록 비동기 조회
+      .then(response => {
+        if (response.ok) return response.text();
+        throw new Error("댓글 수정 실패");
+      })
+      .then(result => {
+        if (result > 0) {
+          alert("댓글이 수정 되었습니다");
+          selectCommentList(); // 댓글 목록 비동기 조회
 
-      } else {
-        alert("댓글 수정 실패");
-      }
-    })
-    .catch(err => console.error(err));
+        } else {
+          alert("댓글 수정 실패");
+        }
+      })
+      .catch(err => console.error(err));
 
   })
 

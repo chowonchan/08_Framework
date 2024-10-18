@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import edu.kh.project.sse.dto.Notification;
 import edu.kh.project.sse.mapper.SseMapper;
@@ -44,4 +46,18 @@ public class SseServiceImpl implements SseService{
 	}
 	
 	
+	@Override
+	public int notReadCheck(int memberNo) {
+		return mapper.notReadCheck(memberNo);
+	}
+	
+	@Override
+	public void deleteNotification(int notificationNo) {
+		mapper.deleteNotification(notificationNo);
+	}
+	
+	@Override
+	public void updateNotification(int notificationNo) {
+		mapper.updateNotification(notificationNo);
+	}
 }
