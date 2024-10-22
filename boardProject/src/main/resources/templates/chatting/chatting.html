@@ -30,16 +30,16 @@
 			</div>
 
 			<ul id="resultArea">
-				<li class="result-row" data-id="1">
-					<img class="result-row-img" src="/images/user.gif">
+				<!-- <li class="result-row" data-id="1">
+					<img class="result-row-img" src="/images/user.png">
 					<span> <mark>유저</mark>일</span>
 				</li>
 				<li class="result-row"  data-id="2">
-					<img class="result-row-img" src="/images/user.gif">
+					<img class="result-row-img" src="/images/user.png">
 					<span><mark>유저</mark>이</span>
 				</li>
 
-				<li class="result-row">일치하는 회원이 없습니다</li>
+				<li class="result-row">일치하는 회원이 없습니다</li> -->
 			</ul>
 		</div>
 
@@ -108,7 +108,7 @@
 	<th:block th:replace="~{common/footer}"></th:block>
 
 
-	<!-------------- sockjs를 이용한 WebSocket 구현을 위해 라이브러리 추가------------>
+	<!--------------------------------------- sockjs를 이용한 WebSocket 구현을 위해 라이브러리 추가 ---------------------------------------------->
 
 	<!-- https://github.com/sockjs/sockjs-client -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
@@ -116,6 +116,7 @@
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
 
     const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ '로그인 회원 번호';
+    const loginMemberNickname = /*[[${session.loginMember?.memberNickname}]]*/ '로그인 회원 닉네임';
 	</script>
 
 	<script src="/js/chatting/chatting.js"></script>

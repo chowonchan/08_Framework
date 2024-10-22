@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
 //		log.debug("비밀번호 일치? : {}", 
 //							encoder.matches(memberPw, loginMember.getMemberPw()));
 		
-		// 입력 받은 비밀 번호와 DB에서 조회된 비밀 번호가 일치하지 않을 ㄸ
+		// 입력 받은 비밀 번호와 DB에서 조회된 비밀 번호가 일치하지 않을 때
 		if( !encoder.matches(memberPw, loginMember.getMemberPw()) ) {
 				return null;
 		}

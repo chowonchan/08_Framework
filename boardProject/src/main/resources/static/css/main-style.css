@@ -62,7 +62,7 @@ header > section:first-child{
 
 #homeLogo{
   /* 지정된 너비에 맞게 높이 자동 지정 */
-  width: 240px;
+  width: 120px;
   height: auto;
 }
 
@@ -497,9 +497,6 @@ label[for="headerMenuToggle"]:hover{
   color: white;
 } 
 
-
-
-
 /*  알림 */
 header>section:nth-child(3) {
   position: relative;
@@ -629,4 +626,9 @@ header>section:nth-child(3) {
 
 .notification-item:hover > .notification-text{
   text-decoration: underline;
+}
+
+/* 단어 길이 영역 초과 시 ... 으로 변경  */
+.chat-preview{
+  word-break: break-word;
 }
